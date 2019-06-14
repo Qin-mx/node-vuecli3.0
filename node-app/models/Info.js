@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 const InfoSchema = new Schema({
     type:{
         type: String,
+        require:true,
     },
     describe:{
         type: String,
