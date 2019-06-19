@@ -10,13 +10,10 @@ const passport = require('passport')
 router.get('/list',passport.authenticate('jwt',{session:false}),(req,res)=>{
     // 获取当前列表
     Infos.find().then( data => {
-        if(data){
-            return res.status(200).json(data)
-        }
-        res.json.status(404).json('没有任何内容')
-        
+        return res.json({data,code:200,msg:'成功'})
+  
     }).catch(err=>{
-        res.status(404).json(err)
+        res.json({msg:err,code:400})
     })
 })
 

@@ -20,12 +20,12 @@ const passport = require('passport')
 
 /**注册 */
 router.post('/register',(req,res)=>{
-    // console.log(req.body)
+    console.log(req.body)
     // 当获取数据以后，判断数据库中是否存在
     User.findOne({email:req.body.email})
     .then( user => {
         if(user){
-            return res.status(400).json('邮箱已被注册！')
+            return res.json({msg:'邮箱已被注册！',code:400})
         }else{
             let avatar = gravatar.url(req.body.email, {s: '200', r: 'pg',d:'mm'});
             const newUser = new User({
@@ -43,7 +43,11 @@ router.post('/register',(req,res)=>{
                     if(err) throw err;
                     newUser.password = hash;
                     newUser.save()
-                    .then( user=>res.json(user))
+                    .then( user=>res.json({
+                        // user,
+                        msg:'注册成功',
+                        code:200
+                    }))
                     .catch( err=>console.log(err))
                 });
             });
@@ -59,7 +63,7 @@ router.post('/login',(req,res) =>{
     console.log(email)
     User.findOne({email}).then(user => {
         if(!user){
-            return res.status(404).json('用户不存在！')
+            return res.json({msg:'用户不存在！',code:400})
         }
 
         // 密码匹配
@@ -75,7 +79,7 @@ router.post('/login',(req,res) =>{
                     // avatar:user.avatar,
                     // identity:user.identity,
                 };
-                jwt.sign(rule,'secret',{expiresIn:3600},(err,token)=>{
+                jwt.sign(rule,'secret',{ expiresIn: 60*60 },(err,token)=>{
                     if(err) throw err;
                     res.json({
                         success:true,
@@ -85,7 +89,7 @@ router.post('/login',(req,res) =>{
                 // // 当前密码匹配成功
                 // res.json({msg: 'success'});
             }else{
-                res.status(404).json('密码错误！')
+                res.json({msg:'密码错误！',code:400})
             }
         })
     })

@@ -1,7 +1,7 @@
 <template>
     <div class="header">
         <el-row>
-           <el-col :span="6">
+           <el-col :span="12">
                <div class="logo">
                    后台管理系统
                </div>
@@ -22,8 +22,11 @@
     width: 100%;
     height: 60px;
     line-height: 60px;
-    background: $HEAD_BG;
-    color: #fff;
-
+    background: #000;
+    padding: 0 20px;
+    .logo{
+        font-size: 30px;
+        color: #fff;
+    }
 }
 </style>

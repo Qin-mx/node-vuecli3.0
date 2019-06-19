@@ -1,0 +1,49 @@
+@charset "utf-8";
+@import './theme.scss';
+
+$font_default_color:$font-color-theme;
+$font_default_size:$font_size_12;
+
+*{
+	margin:0;padding:0;box-sizing:border-box;
+	/*@include font-dpr($font_default_size);*/
+}
+a{text-decoration:none;color:$font_default_color;}
+
+.width{
+	width:100%;
+}
+
+.tl{
+	text-align:left;
+}
+.tc{
+	text-align:center;
+}
+.tr{
+	text-align:right;
+}
+.fl{
+	float:left;
+}
+.fr{
+	float:right;
+}
+.clear::after{
+	content:'';overflow:hidden;clear:both;
+}
+// nprogress的样式修改
+#nprogress .bar {
+    height: 1px;
+}
+#nprogress .spinner-icon{
+    width: 10px;
+    height: 10px;
+    border: solid 1px transparent;
+    border-top-color: #29d;
+    border-left-color: #29d;
+}
+#nprogress .spinner {
+    top: 10px;
+    right: 10px;
+}

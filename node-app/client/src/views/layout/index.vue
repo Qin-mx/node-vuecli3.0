@@ -6,7 +6,14 @@
 
 <script>
     export default {
-        
+        name:'layout',
+        created(){
+            this.$store.dispatch('InfoList').then(res=>{
+                console.log(res)
+            }).catch(err=>{
+                console.log(err)
+            })
+        }
     }
 </script>
 
